@@ -1,0 +1,28 @@
+<h1>Todas as Tasks:</h1>
+<ul class="task-list">
+  {{#each tarefas}}
+    <li>
+      {{#if this.feito}}
+      <a href="/" class="title done">{{this.titulo}}</a>
+      {{else}}
+      <a href="/" class="title">{{this.titulo}}</a>
+      {{/if}}
+      <span class="actions">
+        <form action="/tarefas/updatestatus" method="POST">
+        <input type="hidden" name="id" value={{this.id}}>
+        <input type="hidden" name="done" value={{this.feito}}>
+           <button type="submit">
+             <a href="/"><i class="bi bi-check2"></i></a>
+           </button>
+        </form>
+        <a href="/tarefas/edit/{{this.id}}"><i class="bi bi-pencil-square"></i></a>
+        <form action="/tarefas/remove" method="POST">
+          <input type="hidden" name="id" value={{this.id}}>
+          <button type="submit">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </form>
+      </span>
+    </li>
+  {{/each}}
+</ul>
